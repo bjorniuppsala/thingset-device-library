@@ -672,6 +672,9 @@ int ts_txt_get(struct ts_context *ts, const struct ts_data_object *parent, uint3
 
 int ts_txt_create(struct ts_context *ts, const struct ts_data_object *object)
 {
+#if TS_IMMUTABLE_DATAOBJECT_SUBSETS
+        return ts_txt_response(ts, TS_STATUS_NOT_IMPLEMENTED);
+#else
     if (ts->tok_count > 1) {
         // only single JSON primitive supported at the moment
         return ts_txt_response(ts, TS_STATUS_NOT_IMPLEMENTED);
@@ -693,10 +696,14 @@ int ts_txt_create(struct ts_context *ts, const struct ts_data_object *object)
         }
     }
     return ts_txt_response(ts, TS_STATUS_METHOD_NOT_ALLOWED);
+#endif
 }
 
 int ts_txt_delete(struct ts_context *ts, const struct ts_data_object *object)
 {
+#if TS_IMMUTABLE_DATAOBJECT_SUBSETS
+        return ts_txt_response(ts, TS_STATUS_NOT_IMPLEMENTED);
+#else
     if (ts->tok_count > 1) {
         // only single JSON primitive supported at the moment
         return ts_txt_response(ts, TS_STATUS_NOT_IMPLEMENTED);
@@ -718,6 +725,7 @@ int ts_txt_delete(struct ts_context *ts, const struct ts_data_object *object)
         }
     }
     return ts_txt_response(ts, TS_STATUS_METHOD_NOT_ALLOWED);
+#endif
 }
 
 int ts_txt_exec(struct ts_context *ts, const struct ts_data_object *object)

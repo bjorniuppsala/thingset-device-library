@@ -58,6 +58,12 @@ config THINGSET_CPP_LEGACY
           ThingSet protocol library. Enable if your C++ code uses
           DataNode or ArrayInfo instead of ThingSetDataNode or ThingSetArrayInfo.
 
+config THINGSET_IMMUTABLE_SUBSETS
+        bool "Make thingset subsets immutable (saves a lot of ram)."
+        default n
+        help
+          Swithcing on disables handling of runtime mutable subsets.
+
 module = THINGSET
 module-str = thingset
 source "subsys/logging/Kconfig.template.log_config"

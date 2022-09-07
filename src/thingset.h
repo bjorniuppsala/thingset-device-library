@@ -390,13 +390,13 @@ struct ts_data_object {
     /**
      * Data object name
      */
-    const char *name;
+    const char * const name;
 
     /**
      * Pointer to the variable containing the data. The variable type must match the type as
      * specified
      */
-    void *const data;
+    const void *const data;
 
     /**
      * One of TS_TYPE_INT32, _FLOAT, ...
@@ -418,8 +418,10 @@ struct ts_data_object {
     /**
      * Flags to assign data item to different data item subsets (e.g. for publication messages)
      */
+    #if TS_IMMUTABLE_DATAOBJECT_SUBSETS
+    const
+    #endif
     uint16_t subsets;
-
 };
 
 /* support for legacy code with old nomenclature */
